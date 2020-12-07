@@ -2,6 +2,7 @@ package com.lcy.core.listener
 
 
 interface ListViewListener {
+
     fun setState()
 
     /**

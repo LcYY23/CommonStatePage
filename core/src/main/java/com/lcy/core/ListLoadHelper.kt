@@ -32,20 +32,30 @@ class ListLoadHelper<T, K> {
     private var number: Int = 0;
 
 
-    private var listener: LoadActionListener? = null
+    private var listener: LoadActionListener<T, K>? = null
 
-    fun init(config: ListConfigBuilder<T, K>, l: LoadActionListener) {
+    fun init(config: ListConfigBuilder<T, K>, l: LoadActionListener<T, K>) {
         page = config.getPage()
         number = config.getNumber()
         mWrapListModel = config.getListView()
         mWrapRefreshModel = config.getRefreshView()
         listener = l
 
-        mWrapListModel?.setListener(listener)
+        mWrapListModel?.setListener(object : WrapListModel.WrapListModelListener<T> {
+
+        })
+
         mWrapListModel?.initScrollingEvent(5)
         mWrapListModel?.setState()
 
-        mWrapRefreshModel?.setListener(listener)
+
+        mWrapRefreshModel?.setListener(object : WrapRefreshModel.WrapRefreshModelListener<K> {
+            override fun refresh(swipeRefreshModel: WrapRefreshModel<K>) {
+                listener?.refresh(swipeRefreshModel)
+            }
+        })
+
+
         mWrapRefreshModel?.initRefresh()
     }
 

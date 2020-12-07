@@ -8,6 +8,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.lcy.core.ListConfigBuilder
 import com.lcy.core.ListLoadHelper
 import com.lcy.core.LoadActionListener
+import com.lcy.core.wrap.WrapRefreshModel
 import com.lcy.demo.wrapImp.RecyclerViewWrap
 import com.lcy.demo.wrapImp.SwipeRefreshModel
 
@@ -24,6 +25,12 @@ class DemoActivity : AppCompatActivity() {
         val sw = findViewById<SwipeRefreshLayout>(R.id.sw)
 
 
+        rc.layoutManager = LinearLayoutManager(this)
+        val adapter = DemoListAdapter(this)
+        rc.adapter = adapter
+        adapter.setData(gerData())
+
+
         //方案1
         val configBuilder = ListConfigBuilder.newBuilder<RecyclerView, SwipeRefreshLayout>()
             .setListView(RecyclerViewWrap(rc))
@@ -31,13 +38,15 @@ class DemoActivity : AppCompatActivity() {
             .setNumber(10)
             .setPage(1)
 
-        helper.init(configBuilder, object : LoadActionListener {
+        helper.init(configBuilder, object : LoadActionListener<RecyclerView, SwipeRefreshLayout> {
 
             override fun firstLoad() {
-
+                adapter.setData(gerData())
             }
 
-            override fun refresh() {
+            override fun refresh(refreshModel: WrapRefreshModel<SwipeRefreshLayout>) {
+                refreshModel.getView().isRefreshing = false
+
 
             }
 
@@ -54,10 +63,7 @@ class DemoActivity : AppCompatActivity() {
             }
         })
 
-        rc.layoutManager = LinearLayoutManager(this)
-        val adapter = DemoListAdapter(this)
-        rc.adapter = adapter
-        adapter.setData(gerData())
+
     }
 
 

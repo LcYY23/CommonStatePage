@@ -30,9 +30,13 @@ open class WrapListModel<T>(t: T) : ListViewListener {
     override fun preLoadMore() {}
 
 
-    var mListener: LoadActionListener? = null
-    fun setListener(listener: LoadActionListener?) {
+    var mListener: WrapListModelListener<T>? = null
+    fun setListener(listener: WrapListModelListener<T>?) {
         mListener = listener
+    }
+
+    interface WrapListModelListener<T> {
+
     }
 
 

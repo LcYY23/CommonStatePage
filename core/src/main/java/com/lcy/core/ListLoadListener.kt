@@ -1,9 +1,11 @@
 package com.lcy.core
 
-interface LoadActionListener {
+import com.lcy.core.wrap.WrapRefreshModel
+
+interface LoadActionListener<T, K> {
     fun firstLoad()
     fun loadMore()
-    fun refresh()
+    fun refresh(refreshModel: WrapRefreshModel<K>)
     fun error()
     fun empty()
 }

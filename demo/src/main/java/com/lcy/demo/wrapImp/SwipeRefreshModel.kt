@@ -8,7 +8,7 @@ class SwipeRefreshModel(private val sw: SwipeRefreshLayout)
 
     override fun initRefresh() {
         sw.setOnRefreshListener {
-            mListener?.refresh()
+            mListener?.refresh(this)
         }
     }
 }
