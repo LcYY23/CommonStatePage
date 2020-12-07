@@ -11,13 +11,17 @@ import com.lcy.core.LoadActionListener
 import com.lcy.demo.wrapImp.RecyclerViewWrap
 import com.lcy.demo.wrapImp.SwipeRefreshModel
 
-class DemoActivity : AppCompatActivity(){
+class DemoActivity : AppCompatActivity() {
 
     private val helper = ListLoadHelper<RecyclerView, SwipeRefreshLayout>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_demo_list)
+
+
+        val rc = findViewById<RecyclerView>(R.id.rc)
+        val sw = findViewById<SwipeRefreshLayout>(R.id.sw)
 
 
         //方案1
