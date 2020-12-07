@@ -1,2 +1,4 @@
+include ':demo'
+include ':core'
 include ':app'
 rootProject.name = "CommonStatePage"
