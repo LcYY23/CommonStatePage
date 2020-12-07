@@ -20,7 +20,9 @@ class DemoListAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_demo_list, parent))
+        return ViewHolder(
+            LayoutInflater.from(context).inflate(R.layout.item_demo_list, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
