@@ -7,6 +7,9 @@ open class WrapRefreshModel<K>(val k: K) : RefreshViewListener {
     override fun initRefresh() {
 
     }
+    override fun stopRefresh() {
+
+    }
 
 
     var mListener: WrapRefreshModelListener<K>? = null
@@ -15,14 +18,7 @@ open class WrapRefreshModel<K>(val k: K) : RefreshViewListener {
     }
 
 
-
-    fun getView(): K {
-        return k
-    }
-
     interface WrapRefreshModelListener<K> {
-
-        fun refresh(swipeRefreshModel: WrapRefreshModel<K>)
-
+        fun refresh()
     }
 }

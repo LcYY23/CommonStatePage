@@ -1,19 +1,22 @@
 package com.lcy.core.wrap
 
-import com.lcy.core.LoadActionListener
 import com.lcy.core.listener.ListViewListener
 
 
 open class WrapListModel<T>(t: T) : ListViewListener {
 
 
-    override fun setState() {}
-
     /**
      * 加载更多触发方法
      * @param判断到底部多少项开始加载下一页
      */
-    override fun initScrollingEvent(waitLoadMoreItem: Int) {}
+    override fun init(waitLoadMoreItem: Int) {
+
+    }
+
+    override fun loadMore() {
+        mListener?.loadMore()
+    }
 
 
     /**
@@ -24,19 +27,14 @@ open class WrapListModel<T>(t: T) : ListViewListener {
     }
 
 
-    /**
-     * 准备下一页
-     */
-    override fun preLoadMore() {}
-
-
     var mListener: WrapListModelListener<T>? = null
     fun setListener(listener: WrapListModelListener<T>?) {
         mListener = listener
     }
 
-    interface WrapListModelListener<T> {
 
+    interface WrapListModelListener<T> {
+        fun loadMore()
     }
 
 

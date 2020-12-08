@@ -8,15 +8,11 @@ class RecyclerViewWrap(private val recyclerView: RecyclerView) :
     WrapListModel<RecyclerView>(recyclerView) {
 
 
-    override fun setState() {
-
-    }
-
     /**
      * 加载更多触发方法
      * @param waitLoadMoreItem 判断到底部多少项开始加载下一页
      */
-    override fun initScrollingEvent(waitLoadMoreItem: Int) {
+    override fun init(waitLoadMoreItem: Int) {
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -28,10 +24,9 @@ class RecyclerViewWrap(private val recyclerView: RecyclerView) :
                         val total = recyclerView.adapter?.itemCount ?: 0
                         if (last > 0 && last >= total - waitLoadMoreItem) {
                             if (checkMore()) {
-                                preLoadMore()
+                                loadMore()
                             }
                         }
-
                     }
                 }
             }
@@ -40,21 +35,18 @@ class RecyclerViewWrap(private val recyclerView: RecyclerView) :
 
 
     /**
-     * 是否还有下一页
+     * 控制是否还有下一页（根据数据）
      */
     override fun checkMore(): Boolean {
-//        if (mHasMore && !isLoading) {
-//
-//        }
-        return false
+        return true
     }
 
 
     /**
-     * 准备下一页
+     * 加载下一页
      */
-    override fun preLoadMore() {
-//        pageNumber++
+    override fun loadMore() {
+        super.loadMore()
     }
 
 

@@ -41,22 +41,31 @@ class ListLoadHelper<T, K> {
         mWrapRefreshModel = config.getRefreshView()
         listener = l
 
+        mWrapListModel?.init(5)
         mWrapListModel?.setListener(object : WrapListModel.WrapListModelListener<T> {
-
-        })
-
-        mWrapListModel?.initScrollingEvent(5)
-        mWrapListModel?.setState()
-
-
-        mWrapRefreshModel?.setListener(object : WrapRefreshModel.WrapRefreshModelListener<K> {
-            override fun refresh(swipeRefreshModel: WrapRefreshModel<K>) {
-                listener?.refresh(swipeRefreshModel)
+            override fun loadMore() {
+                listener?.loadMore()
             }
         })
 
+        mWrapRefreshModel?.setListener(object : WrapRefreshModel.WrapRefreshModelListener<K> {
+            override fun refresh() {
+                setCommonState()
+                listener?.refresh()
+            }
+        })
 
         mWrapRefreshModel?.initRefresh()
+    }
+
+
+    fun stopRefresh() {
+        mWrapRefreshModel?.stopRefresh()
+    }
+
+
+    fun setErrorState() {
+        listener?.error()
     }
 
 
@@ -65,8 +74,7 @@ class ListLoadHelper<T, K> {
     }
 
 
-    fun setErrorState() {
-        listener?.error()
+    fun setCommonState() {
+        listener?.commonState()
     }
-
 }
