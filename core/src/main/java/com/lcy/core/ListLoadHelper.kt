@@ -58,22 +58,31 @@ class ListLoadHelper<T, K> {
         mWrapRefreshModel?.initRefresh()
     }
 
-
+    /**
+     * 根据获取数据结果停止刷新UI刷新
+     */
     fun stopRefresh() {
         mWrapRefreshModel?.stopRefresh()
     }
 
-
+    /**
+     * 根据获取数据结果显示错误缺省图
+     */
     fun setErrorState() {
         listener?.error()
     }
 
 
+    /**
+     * 根据获取数据结果显示空白页缺省图
+     */
     fun setEmptyState() {
         listener?.empty()
     }
 
-
+    /**
+     * 根据获取数据结果显示正常视图
+     */
     fun setCommonState() {
         listener?.commonState()
     }

@@ -35,7 +35,7 @@ class RecyclerViewWrap(private val recyclerView: RecyclerView) :
 
 
     /**
-     * 控制是否还有下一页（根据数据）
+     * 控制是否还有下一页（需要修改为根据数据）
      */
     override fun checkMore(): Boolean {
         return true
